@@ -1,9 +1,6 @@
 package com.test.credibanco.repository.card;
 
 import com.test.credibanco.model.dto.CardDto;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
