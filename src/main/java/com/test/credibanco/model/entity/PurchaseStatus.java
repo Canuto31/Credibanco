@@ -1,4 +1,4 @@
 package com.test.credibanco.model.entity;
 
-public class PruchaseStatus {
+public class PurchaseStatus {
 }
