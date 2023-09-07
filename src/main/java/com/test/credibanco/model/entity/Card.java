@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tarjeta")
@@ -33,4 +34,7 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "estado_tarjeta")
     private CardStatus cardStatus;
+
+    @OneToMany(mappedBy = "card")
+    private List<Purchase> purchases;
 }
