@@ -12,11 +12,12 @@ import java.util.List;
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numero_tarjeta")
     private String cardId;
+
+    @Column(name = "producto_id")
+    private Integer productId;
 
     @ManyToOne
     @JoinColumn(name = "titular")

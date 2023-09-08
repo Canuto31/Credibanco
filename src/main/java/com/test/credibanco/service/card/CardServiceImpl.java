@@ -36,8 +36,8 @@ public class CardServiceImpl implements CardService {
 
         String cardId = String.format("%06d%s", id, randomNumbers.toString());
 
-        cardDto.setId(id);
         cardDto.setCardId(cardId);
+        cardDto.setProductId(id);
 
         Date creationDate = new Date();
         cardDto.setCreationDate(new Date());

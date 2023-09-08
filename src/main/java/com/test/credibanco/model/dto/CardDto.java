@@ -7,9 +7,9 @@ import java.util.Date;
 @Data
 public class CardDto {
 
-    private Integer id;
-
     private String cardId;
+
+    private Integer productId;
 
     private OwnerDto owner;
 
