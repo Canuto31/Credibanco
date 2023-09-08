@@ -32,6 +32,7 @@ public class PurchaseMapper implements BaseMapper<PurchaseDto, Purchase> {
         dto.setTransactionId(entity.getTransactionId());
         dto.setCard(cardMapper.entityToDto(entity.getCard()));
         dto.setTransactionDate(entity.getTransactionDate());
+        dto.setPrice(entity.getPrice());
         dto.setPurchaseStatus(purchaseStatusMapper.entityToDto(entity.getPurchaseStatus()));
 
         return dto;
@@ -44,6 +45,7 @@ public class PurchaseMapper implements BaseMapper<PurchaseDto, Purchase> {
         entity.setTransactionId(dto.getTransactionId());
         entity.setCard(cardMapper.dtoToEntity(dto.getCard()));
         entity.setTransactionDate(dto.getTransactionDate());
+        entity.setPrice(dto.getPrice());
         entity.setPurchaseStatus(purchaseStatusMapper.dtoToEntity(dto.getPurchaseStatus()));
 
         return entity;

@@ -3,6 +3,7 @@ package com.test.credibanco.controller;
 import com.test.credibanco.model.dto.PurchaseDto;
 import com.test.credibanco.model.request.PurchaseAnulationRequest;
 import com.test.credibanco.model.request.PurchaseMakingRequest;
+import com.test.credibanco.model.response.PurchaseResponse;
 import com.test.credibanco.service.purchase.PurchaseService;
 import com.test.credibanco.utils.PurchaseStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class PurchaseController {
     private PurchaseService service;
 
     @PostMapping("/purchase")
-    private ResponseEntity<PurchaseDto> generatePurchase(@RequestBody PurchaseMakingRequest request) {
+    private ResponseEntity<PurchaseResponse> generatePurchase(@RequestBody PurchaseMakingRequest request) {
         return new ResponseEntity<>(service.makeAPurchase(request), HttpStatus.OK);
     }
 
     @GetMapping("/{transactionId}")
-    private ResponseEntity<PurchaseDto> getPurchaseByTransactionId(@PathVariable int transactionId) {
+    private ResponseEntity<PurchaseResponse> getPurchaseByTransactionId(@PathVariable int transactionId) {
         return service.getPurchaseByTransactionId(transactionId).map(purchase -> new ResponseEntity<>(purchase, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
