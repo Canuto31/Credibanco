@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "301ad8e1-1df4-4b68-9df1-b01244cd04f3",
+		"name": "Credibanco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28101888"
+	},
+	"item": [
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "GetBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/credibanco/api/card/balance/1234567890123456",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"card",
+								"balance",
+								"1234567890123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RechargeCard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"cardId\": \"1234566824754767\",\r\n\"balance\": \"100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/credibanco/api/card/balance",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"card",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BlockCard",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/credibanco/api/card/1234567890123456",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"card",
+								"1234567890123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActivateCard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"cardId\": \"1234567890123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/credibanco/api/card/enroll",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"card",
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GenerateCardId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/credibanco/api/card/123456/number",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"card",
+								"123456",
+								"number"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase",
+			"item": [
+				{
+					"name": "GetPurchase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/credibanco/api/transaction/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"transaction",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MakePurchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"3456789012345678\",\r\n    \"price\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/credibanco/api/transaction/purchase",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"transaction",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AnulatePurchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"3456789012345678\",\r\n    \"transactionId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/credibanco/api/transaction/anulation",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"credibanco",
+								"api",
+								"transaction",
+								"anulation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
