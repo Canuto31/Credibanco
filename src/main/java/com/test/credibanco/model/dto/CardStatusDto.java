@@ -1,11 +1,11 @@
-package com.test.credibanco.model.dto;
+    package com.test.credibanco.model.dto;
 
-import lombok.Data;
+    import lombok.Data;
 
-@Data
-public class CardStatusDto {
+    @Data
+    public class CardStatusDto {
 
-    private Integer id;
+        private Integer id;
 
-    private String name;
-}
+        private String name;
+    }

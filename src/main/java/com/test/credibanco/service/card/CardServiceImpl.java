@@ -1,12 +1,15 @@
 package com.test.credibanco.service.card;
 
 import com.test.credibanco.model.dto.CardDto;
+import com.test.credibanco.model.dto.CardStatusDto;
 import com.test.credibanco.model.response.CheckCardBalanceResponse;
 import com.test.credibanco.repository.card.CardRepository;
 import com.test.credibanco.service.others.OtherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
 
@@ -32,18 +35,29 @@ public class CardServiceImpl implements CardService {
 
         String cardNumber = String.format("%06d%s", cardId, randomNumbers.toString());
 
-        cardDto.setCardNumber(Integer.parseInt(cardNumber));
+        cardDto.setCardNumber(cardNumber);
+
+        Date creationDate = new Date();
+        cardDto.setCreationDate(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(creationDate);
+        calendar.add(Calendar.YEAR, 3);
+        Date expirationDate = calendar.getTime();
+        cardDto.setExpirationDate(expirationDate);
+
+        cardDto.setBalance(0.0);
+
+        Optional<CardStatusDto> InactiveStatusOptional = otherService.getStatusByName("Inactiva");
+        cardDto.setCardStatus(InactiveStatusOptional.orElse(null));
 
         return repository.generateCardNumber(cardDto);
     }
 
     @Override
     public boolean activateCard(int cardId) {
-        int idActiveStatus = otherService.getActiveStatusIdOnTheCard();
-
-        if (idActiveStatus == -1) {
-            return false;
-        }
+        Optional<CardStatusDto> activeStatusOptional = otherService.getStatusByName("Activa");
+        int idActiveStatus = activeStatusOptional.isPresent() ? activeStatusOptional.get().getId() : -1;
 
         return repository.getCardById(cardId).map(card -> {
             repository.activateCard(cardId, idActiveStatus);
@@ -53,11 +67,8 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public boolean blockCard(int cardId) {
-        int idLockedStatus = otherService.getLockedStatusIdOnTheCard();
-
-        if (idLockedStatus == -1) {
-            return false;
-        }
+        Optional<CardStatusDto> lockedStatusOptional = otherService.getStatusByName("Bloqueada");
+        int idLockedStatus = lockedStatusOptional.isPresent() ? lockedStatusOptional.get().getId() : -1;
 
         return repository.getCardById(cardId).map(card -> {
             repository.blockCard(cardId, idLockedStatus);

@@ -16,7 +16,7 @@ public class Card {
     private Integer id;
 
     @Column(name = "numero_tarjeta")
-    private Integer cardNumber;
+    private String cardNumber;
 
     @ManyToOne
     @JoinColumn(name = "titular")

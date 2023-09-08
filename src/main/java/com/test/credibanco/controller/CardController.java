@@ -28,7 +28,7 @@ public class CardController {
     }
 
     @DeleteMapping("/{cardId}")
-    private ResponseEntity<String> blockCard(@RequestParam int cardId) {
+    private ResponseEntity<String> blockCard(@PathVariable int cardId) {
         return new ResponseEntity<>(service.blockCard(cardId) ? "locked" : "Not found", service.blockCard(cardId) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
@@ -38,7 +38,7 @@ public class CardController {
     }
 
     @GetMapping("/balance/{cardId}")
-    private ResponseEntity<CheckCardBalanceResponse> checkCardBalance(@RequestParam int cardId) {
-        return service.getCardBalanceById(cardId).map(cardBalance -> new ResponseEntity<>(cardBalance, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    private ResponseEntity<CheckCardBalanceResponse> checkCardBalance(@PathVariable String cardId) {
+        return service.getCardBalanceById(Integer.parseInt(cardId)).map(cardBalance -> new ResponseEntity<>(cardBalance, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
