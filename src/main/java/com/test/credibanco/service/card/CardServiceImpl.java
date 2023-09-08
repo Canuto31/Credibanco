@@ -66,11 +66,14 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public boolean rechargeCard(int cardId, double newBalance) {
-        return false;
+        return repository.getCardById(cardId).map(card -> {
+            repository.rechargeCard(cardId, card.getBalance() + newBalance);
+            return true;
+        }).orElse(false);
     }
 
     @Override
     public Optional<CardDto> getCardById(int cardId) {
-        return Optional.empty();
+        return repository.getCardById(cardId);
     }
 }
