@@ -7,11 +7,13 @@ import java.util.Date;
 @Data
 public class PurchaseDto {
 
-    private Integer id;
-
-    private Date transactionDate;
+    private Integer transactionId;
 
     private CardDto card;
+
+    private double price;
+
+    private Date transactionDate;
 
     private PurchaseStatusDto purchaseStatus;
 }

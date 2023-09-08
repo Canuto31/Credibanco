@@ -1,6 +1,5 @@
 package com.test.credibanco.repository.card;
 
-import com.test.credibanco.model.dto.CardStatusDto;
 import com.test.credibanco.model.entity.Card;
 import com.test.credibanco.model.entity.CardStatus;
 import jakarta.transaction.Transactional;
@@ -10,14 +9,14 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface CardCrudRepository extends CrudRepository<Card, Integer> {
+public interface CardCrudRepository extends CrudRepository<Card, String> {
 
     Optional<Card> findByCardId(String cardId);
 
     @Modifying
     @Transactional
-    @Query("UPDATE Card c SET c.cardStatus = :lockedStatus WHERE c.cardId = :cardId")
-    void changeCardStatus(String cardId, CardStatus lockedStatus);
+    @Query("UPDATE Card c SET c.cardStatus = :cardStatus WHERE c.cardId = :cardId")
+    void changeCardStatus(String cardId, CardStatus cardStatus);
 
     @Modifying
     @Transactional

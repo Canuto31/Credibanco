@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "compra")
@@ -12,15 +11,19 @@ import java.util.List;
 public class Purchase {
 
     @Id
+    @Column(name ="id_transaccion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "fecha_transaccion")
-    private Date transactionDate;
+    private Integer transactionId;
 
     @ManyToOne
     @JoinColumn(name = "tarjeta")
     private Card card;
+
+    @Column(name = "precio")
+    private double price;
+
+    @Column(name = "fecha_transaccion")
+    private Date transactionDate;
 
     @ManyToOne
     @JoinColumn(name = "estado_compra")
