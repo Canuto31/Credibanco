@@ -1,0 +1,10 @@
+Esta es la información a tener en cuenta para la revision de la prueba unitaria.
+
+Esta prueba se hizo utilizando una base de datos postgres.
+Dentro de los archivos del codigo, en la carpeta templates, podran tener los query para crear las tablas de la base de datos junto con sus queries para poblar estas tablas.
+
+Se manejan dos ambientes, uno de desarrollo y otro de produccion. Se entrega el codigo configurado al ambiente de desarrollo.
+Para poder probar se necesita cambiar las credenciales de la base de datos que hay en el .properties.
+
+Dentro de la carpeta de static se encuentra la coleccion de postman para poder probar los servicios.
+
