@@ -50,7 +50,7 @@ public class CardServiceImpl implements CardService {
 
         cardDto.setBalance(0.0);
 
-        Optional<CardStatusDto> InactiveStatusOptional = otherService.getStatusByName("Inactiva");
+        Optional<CardStatusDto> InactiveStatusOptional = otherService.getStatusByNameForCard("Inactiva");
         cardDto.setCardStatus(InactiveStatusOptional.orElse(null));
 
         return repository.generateCardNumber(cardDto);
@@ -58,7 +58,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public boolean changeCardStatus(String cardId, CardStatusEnum cardStatusEnum) {
-        Optional<CardStatusDto> lockedStatusOptional = otherService.getStatusByName(cardStatusEnum.getStatusName());
+        Optional<CardStatusDto> lockedStatusOptional = otherService.getStatusByNameForCard(cardStatusEnum.getStatusName());
 
         return repository.getCardByCardId(cardId).map(card -> {
             repository.changeCardStatus(cardId, lockedStatusOptional.orElse(null));
@@ -76,11 +76,16 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Optional<CheckCardBalanceResponse> getCardBalanceByCardId(String cardId) {
-        return repository.getCardByCardId(cardId)
+        return this.getCardByCardId(cardId)
                 .map(cardDto -> {
                     CheckCardBalanceResponse response = new CheckCardBalanceResponse();
                     response.setBalance(Double.toString(cardDto.getBalance()));
                     return response;
                 });
+    }
+
+    @Override
+    public Optional<CardDto> getCardByCardId(String cardId) {
+        return repository.getCardByCardId(cardId);
     }
 }

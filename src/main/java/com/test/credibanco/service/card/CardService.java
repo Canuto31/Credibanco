@@ -15,4 +15,6 @@ public interface CardService {
     boolean rechargeCard(String cardId, double newBalance);
 
     Optional<CheckCardBalanceResponse> getCardBalanceByCardId(String cardId);
+
+    Optional<CardDto> getCardByCardId(String cardId);
 }

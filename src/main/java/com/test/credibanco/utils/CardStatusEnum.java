@@ -1,5 +1,8 @@
 package com.test.credibanco.utils;
 
+import lombok.Getter;
+
+@Getter
 public enum CardStatusEnum {
 
     ACTIVA("Activa"),
@@ -12,7 +15,4 @@ public enum CardStatusEnum {
         this.statusName = statusName;
     }
 
-    public String getStatusName() {
-        return statusName;
-    }
 }
