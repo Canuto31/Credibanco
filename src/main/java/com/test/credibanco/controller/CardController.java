@@ -5,6 +5,7 @@ import com.test.credibanco.model.request.CardActivationRequest;
 import com.test.credibanco.model.request.CardRechargeRequest;
 import com.test.credibanco.model.response.CheckCardBalanceResponse;
 import com.test.credibanco.service.card.CardService;
+import com.test.credibanco.utils.CardStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,13 @@ public class CardController {
 
     @PostMapping("/enroll")
     private ResponseEntity<String> activateCard(@RequestBody CardActivationRequest request) {
-        return new ResponseEntity<>(service.activateCard(Integer.parseInt(request.getCardId())) ? "Activated" : "Not found", service.activateCard(Integer.parseInt(request.getCardId())) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(service.changeCardStatus(request.getCardId(), CardStatusEnum.ACTIVA
+        ) ? "Activated" : "Not found", service.changeCardStatus(request.getCardId(), CardStatusEnum.ACTIVA) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{cardId}")
-    private ResponseEntity<String> blockCard(@PathVariable int cardId) {
-        return new ResponseEntity<>(service.blockCard(cardId) ? "locked" : "Not found", service.blockCard(cardId) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    private ResponseEntity<String> blockCard(@PathVariable String cardId) {
+        return new ResponseEntity<>(service.changeCardStatus(cardId, CardStatusEnum.BLOQUEADA) ? "locked" : "Not found", service.changeCardStatus(cardId, CardStatusEnum.BLOQUEADA) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/balance")
@@ -39,6 +41,6 @@ public class CardController {
 
     @GetMapping("/balance/{cardId}")
     private ResponseEntity<CheckCardBalanceResponse> checkCardBalance(@PathVariable String cardId) {
-        return service.getCardBalanceById(Integer.parseInt(cardId)).map(cardBalance -> new ResponseEntity<>(cardBalance, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return service.getCardBalanceByCardId(cardId).map(cardBalance -> new ResponseEntity<>(cardBalance, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

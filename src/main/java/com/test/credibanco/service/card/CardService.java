@@ -2,18 +2,17 @@ package com.test.credibanco.service.card;
 
 import com.test.credibanco.model.dto.CardDto;
 import com.test.credibanco.model.response.CheckCardBalanceResponse;
+import com.test.credibanco.utils.CardStatusEnum;
 
 import java.util.Optional;
 
 public interface CardService {
 
-    CardDto generateCardNumber(int cardId);
+    CardDto generateCardNumber(int id);
 
-    boolean activateCard(int cardId);
+    boolean changeCardStatus(String cardId, CardStatusEnum cardStatusEnum);
 
-    boolean blockCard(int cardId);
+    boolean rechargeCard(String cardId, double newBalance);
 
-    boolean rechargeCard(String cardNumber, double newBalance);
-
-    Optional<CheckCardBalanceResponse> getCardBalanceById(int cardId);
+    Optional<CheckCardBalanceResponse> getCardBalanceByCardId(String cardId);
 }

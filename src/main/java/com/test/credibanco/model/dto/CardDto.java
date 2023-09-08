@@ -9,7 +9,7 @@ public class CardDto {
 
     private Integer id;
 
-    private String cardNumber;
+    private String cardId;
 
     private OwnerDto owner;
 

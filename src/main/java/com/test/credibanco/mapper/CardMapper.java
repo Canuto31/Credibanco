@@ -31,7 +31,7 @@ public class CardMapper implements BaseMapper<CardDto, Card> {
         CardDto dto = new CardDto();
 
         dto.setId(entity.getId());
-        dto.setCardNumber(entity.getCardNumber());
+        dto.setCardId(entity.getCardId());
         dto.setBalance(entity.getBalance());
         dto.setCreationDate(entity.getCreationDate());
         dto.setExpirationDate(entity.getExpirationDate());
@@ -47,7 +47,7 @@ public class CardMapper implements BaseMapper<CardDto, Card> {
         Card entity = new Card();
 
         entity.setId(dto.getId());
-        entity.setCardNumber(dto.getCardNumber());
+        entity.setCardId(dto.getCardId());
         entity.setBalance(dto.getBalance());
         entity.setCreationDate(dto.getCreationDate());
         entity.setExpirationDate(dto.getExpirationDate());

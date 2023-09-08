@@ -5,6 +5,7 @@ import com.test.credibanco.model.dto.CardStatusDto;
 import com.test.credibanco.model.response.CheckCardBalanceResponse;
 import com.test.credibanco.repository.card.CardRepository;
 import com.test.credibanco.service.others.OtherService;
+import com.test.credibanco.utils.CardStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class CardServiceImpl implements CardService {
     private OtherService otherService;
 
     @Override
-    public CardDto generateCardNumber(int cardId) {
+    public CardDto generateCardNumber(int id) {
         CardDto cardDto = new CardDto();
 
         StringBuilder randomNumbers = new StringBuilder();
@@ -33,9 +34,9 @@ public class CardServiceImpl implements CardService {
             randomNumbers.append(randomNumber);
         }
 
-        String cardNumber = String.format("%06d%s", cardId, randomNumbers.toString());
+        String cardId = String.format("%06d%s", id, randomNumbers.toString());
 
-        cardDto.setCardNumber(cardNumber);
+        cardDto.setCardId(cardId);
 
         Date creationDate = new Date();
         cardDto.setCreationDate(new Date());
@@ -55,38 +56,26 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public boolean activateCard(int cardId) {
-        Optional<CardStatusDto> activeStatusOptional = otherService.getStatusByName("Activa");
-        int idActiveStatus = activeStatusOptional.isPresent() ? activeStatusOptional.get().getId() : -1;
+    public boolean changeCardStatus(String cardId, CardStatusEnum cardStatusEnum) {
+        Optional<CardStatusDto> lockedStatusOptional = otherService.getStatusByName(cardStatusEnum.getStatusName());
 
-        return repository.getCardById(cardId).map(card -> {
-            repository.activateCard(cardId, idActiveStatus);
+        return repository.getCardByCardId(cardId).map(card -> {
+            repository.changeCardStatus(cardId, lockedStatusOptional.orElse(null));
             return true;
         }).orElse(false);
     }
 
     @Override
-    public boolean blockCard(int cardId) {
-        Optional<CardStatusDto> lockedStatusOptional = otherService.getStatusByName("Bloqueada");
-        int idLockedStatus = lockedStatusOptional.isPresent() ? lockedStatusOptional.get().getId() : -1;
-
-        return repository.getCardById(cardId).map(card -> {
-            repository.blockCard(cardId, idLockedStatus);
+    public boolean rechargeCard(String cardId, double newBalance) {
+        return repository.getCardByCardId(cardId).map(card -> {
+            repository.rechargeCard(card.getCardId(), card.getBalance() + newBalance);
             return true;
         }).orElse(false);
     }
 
     @Override
-    public boolean rechargeCard(String cardNumber, double newBalance) {
-        return repository.getCardByCardNumber(cardNumber).map(card -> {
-            repository.rechargeCard(card.getId(), card.getBalance() + newBalance);
-            return true;
-        }).orElse(false);
-    }
-
-    @Override
-    public Optional<CheckCardBalanceResponse> getCardBalanceById(int cardId) {
-        return repository.getCardById(cardId)
+    public Optional<CheckCardBalanceResponse> getCardBalanceByCardId(String cardId) {
+        return repository.getCardByCardId(cardId)
                 .map(cardDto -> {
                     CheckCardBalanceResponse response = new CheckCardBalanceResponse();
                     response.setBalance(Double.toString(cardDto.getBalance()));
