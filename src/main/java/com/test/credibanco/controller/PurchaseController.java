@@ -30,6 +30,6 @@ public class PurchaseController {
 
     @PostMapping("/anulation")
     private ResponseEntity<String> anulatePurchase(@RequestBody PurchaseAnulationRequest request) {
-        return new ResponseEntity<>(service.changePurchaseStatus(Integer.parseInt(request.getTransactionId()), PurchaseStatusEnum.ANULADA) ? "Anulated" : "Not Found", service.changePurchaseStatus(Integer.parseInt(request.getCardId()), PurchaseStatusEnum.ANULADA) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(service.changePurchaseStatus(Integer.parseInt(request.getTransactionId()), PurchaseStatusEnum.ANULADA) ? "Anulated" : "Not Found", service.changePurchaseStatus(Integer.parseInt(request.getTransactionId()), PurchaseStatusEnum.ANULADA) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class PurchaseServiceImpl implements PurchaseService{
+public class PurchaseServiceImpl implements PurchaseService {
 
     @Autowired
     private PurchaseRepository repository;
@@ -37,9 +37,15 @@ public class PurchaseServiceImpl implements PurchaseService{
         Optional<PurchaseStatusDto> anulatedStatusOptional = otherService.getStatusByNameForPurchase(purchaseStatusEnum.getStatusName());
 
         return repository.getPurchaseById(transactionId).map(purchase -> {
-            repository.changePurchaseStatus(transactionId, anulatedStatusOptional.orElse(null));
-            cardService.rechargeCard(purchase.getCard().getCardId(), purchase.getPrice());
-            return true;
+            long timeDifference = new Date().getTime() - purchase.getTransactionDate().getTime();
+            long twentyFourHoursInMillis = 24 * 60 * 60 * 1000;
+
+            if (timeDifference <= twentyFourHoursInMillis) {
+                repository.changePurchaseStatus(transactionId, anulatedStatusOptional.orElse(null));
+                cardService.rechargeCard(purchase.getCard().getCardId(), purchase.getPrice());
+                return true;
+            }
+            return false;
         }).orElse(false);
     }
 

@@ -19,21 +19,33 @@ public class OwnerMapper implements BaseMapper<OwnerDto, Owner> {
 
     @Override
     public OwnerDto entityToDto(Owner entity) {
-        return null;
+        OwnerDto dto = new OwnerDto();
+
+        dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+
+        return dto;
     }
 
     @Override
     public Owner dtoToEntity(OwnerDto dto) {
-        return null;
+        Owner entity = new Owner();
+
+        entity.setId(dto.getId());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+
+        return entity;
     }
 
     @Override
     public List<OwnerDto> entitiesToDtos(List<Owner> entities) {
-        return null;
+        return utils.entitiesToDtos(entities, this::entityToDto);
     }
 
     @Override
     public List<Owner> dtosToEntities(List<OwnerDto> dtos) {
-        return null;
+        return utils.dtosToEntities(dtos, this::dtoToEntity);
     }
 }
