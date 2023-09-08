@@ -18,9 +18,9 @@ public class CardController {
     @Autowired
     private CardService service;
 
-    @GetMapping("/{cardId}/number")
-    private ResponseEntity<CardDto> generateCardNumber(@PathVariable int cardId) {
-        return new ResponseEntity<>(service.generateCardNumber(cardId), HttpStatus.OK);
+    @GetMapping("/{productId}/number")
+    private ResponseEntity<CardDto> generateCardNumber(@PathVariable int productId) {
+        return new ResponseEntity<>(service.generateCardNumber(productId), HttpStatus.OK);
     }
 
     @PostMapping("/enroll")

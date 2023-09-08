@@ -20,12 +20,12 @@ CREATE TABLE titular
 
 CREATE TABLE tarjeta
 (
-    id                INT PRIMARY KEY,
-    numero_tarjeta    VARCHAR(16)    NOT NULL,
+    numero_tarjeta    VARCHAR(16) PRIMARY KEY NOT NULL,
+    producto_id       INT                     NOT NULL,
     titular           INT,
-    fecha_creacion    DATE           NOT NULL,
-    fecha_vencimiento DATE           NOT NULL,
-    saldo             DECIMAL(10, 2) NOT NULL,
+    fecha_creacion    DATE                    NOT NULL,
+    fecha_vencimiento DATE                    NOT NULL,
+    saldo             DECIMAL(10, 2)          NOT NULL,
     estado_tarjeta    INT,
     FOREIGN KEY (titular) REFERENCES titular (id),
     FOREIGN KEY (estado_tarjeta) REFERENCES estado_tarjeta (id)
@@ -35,9 +35,9 @@ CREATE TABLE compra
 (
     id                SERIAL PRIMARY KEY,
     fecha_transaccion DATE NOT NULL,
-    tarjeta           INT,
+    tarjeta           VARCHAR(16),
     estado_compra     INT,
-    FOREIGN KEY (tarjeta) REFERENCES tarjeta (id),
+    FOREIGN KEY (tarjeta) REFERENCES tarjeta (numero_tarjeta),
     FOREIGN KEY (estado_compra) REFERENCES estado_compra (id)
 );
 
