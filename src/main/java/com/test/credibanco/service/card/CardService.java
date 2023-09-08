@@ -1,6 +1,7 @@
 package com.test.credibanco.service.card;
 
 import com.test.credibanco.model.dto.CardDto;
+import com.test.credibanco.model.response.CheckCardBalanceResponse;
 
 import java.util.Optional;
 
@@ -14,5 +15,5 @@ public interface CardService {
 
     boolean rechargeCard(int cardId, double newBalance);
 
-    Optional<CardDto> getCardById(int cardId);
+    Optional<CheckCardBalanceResponse> getCardBalanceById(int cardId);
 }

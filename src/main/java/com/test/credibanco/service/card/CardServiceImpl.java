@@ -1,6 +1,7 @@
 package com.test.credibanco.service.card;
 
 import com.test.credibanco.model.dto.CardDto;
+import com.test.credibanco.model.response.CheckCardBalanceResponse;
 import com.test.credibanco.repository.card.CardRepository;
 import com.test.credibanco.service.others.OtherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,12 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public Optional<CardDto> getCardById(int cardId) {
-        return repository.getCardById(cardId);
+    public Optional<CheckCardBalanceResponse> getCardBalanceById(int cardId) {
+        return repository.getCardById(cardId)
+                .map(cardDto -> {
+                    CheckCardBalanceResponse response = new CheckCardBalanceResponse();
+                    response.setBalance(Double.toString(cardDto.getBalance()));
+                    return response;
+                });
     }
 }
