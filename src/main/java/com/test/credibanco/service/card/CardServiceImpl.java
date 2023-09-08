@@ -24,7 +24,7 @@ public class CardServiceImpl implements CardService {
     private OtherService otherService;
 
     @Override
-    public CardDto generateCardNumber(int id) {
+    public CardDto generateCardNumber(int productId) {
         CardDto cardDto = new CardDto();
 
         StringBuilder randomNumbers = new StringBuilder();
@@ -34,10 +34,10 @@ public class CardServiceImpl implements CardService {
             randomNumbers.append(randomNumber);
         }
 
-        String cardId = String.format("%06d%s", id, randomNumbers.toString());
+        String cardId = String.format("%06d%s", productId, randomNumbers.toString());
 
         cardDto.setCardId(cardId);
-        cardDto.setProductId(id);
+        cardDto.setProductId(productId);
 
         Date creationDate = new Date();
         cardDto.setCreationDate(new Date());

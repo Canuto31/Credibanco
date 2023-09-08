@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface CardService {
 
-    CardDto generateCardNumber(int id);
+    CardDto generateCardNumber(int productId);
 
     boolean changeCardStatus(String cardId, CardStatusEnum cardStatusEnum);
 
