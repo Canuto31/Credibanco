@@ -13,7 +13,7 @@ public interface CardService {
 
     boolean blockCard(int cardId);
 
-    boolean rechargeCard(int cardId, double newBalance);
+    boolean rechargeCard(String cardNumber, double newBalance);
 
     Optional<CheckCardBalanceResponse> getCardBalanceById(int cardId);
 }

@@ -39,7 +39,12 @@ public class CardRepositoryImpl implements CardRepository{
     }
 
     @Override
-    public Optional<CardDto> getCardById(int cardId) {
-        return repository.findById(cardId).map(card -> mapper.entityToDto(card));
+    public Optional<CardDto> getCardById(int cardIdr) {
+        return repository.findById(cardIdr).map(card -> mapper.entityToDto(card));
+    }
+
+    @Override
+    public Optional<CardDto> getCardByCardNumber(String cardNumber) {
+        return repository.findByCardNumber(cardNumber).map(card -> mapper.entityToDto(card));
     }
 }

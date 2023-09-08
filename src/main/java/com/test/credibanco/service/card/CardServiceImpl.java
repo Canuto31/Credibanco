@@ -77,9 +77,9 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public boolean rechargeCard(int cardId, double newBalance) {
-        return repository.getCardById(cardId).map(card -> {
-            repository.rechargeCard(cardId, card.getBalance() + newBalance);
+    public boolean rechargeCard(String cardNumber, double newBalance) {
+        return repository.getCardByCardNumber(cardNumber).map(card -> {
+            repository.rechargeCard(card.getId(), card.getBalance() + newBalance);
             return true;
         }).orElse(false);
     }

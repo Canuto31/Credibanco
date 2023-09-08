@@ -15,4 +15,6 @@ public interface CardRepository{
     void rechargeCard(int cardId, double newBalance);
 
     Optional<CardDto> getCardById(int cardId);
+
+    Optional<CardDto> getCardByCardNumber(String cardNumber);
 }

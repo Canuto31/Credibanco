@@ -34,7 +34,7 @@ public class CardController {
 
     @PostMapping("/balance")
     private ResponseEntity<String> rechargeCard(@RequestBody CardRechargeRequest request) {
-        return new ResponseEntity<>(service.rechargeCard(Integer.parseInt(request.getCardId()), Double.parseDouble(request.getBalance())) ? "recharged" : "Not found", service.rechargeCard(Integer.parseInt(request.getCardId()), Double.parseDouble(request.getBalance())) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(service.rechargeCard(request.getCardId(), Double.parseDouble(request.getBalance())) ? "recharged" : "Not found", service.rechargeCard(request.getCardId(), Double.parseDouble(request.getBalance())) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/balance/{cardId}")
