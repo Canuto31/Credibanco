@@ -33,30 +33,11 @@ CREATE TABLE tarjeta
 
 CREATE TABLE compra
 (
-    id                SERIAL PRIMARY KEY,
-    fecha_transaccion DATE NOT NULL,
+    id_transaccion    SERIAL PRIMARY KEY,
     tarjeta           VARCHAR(16),
+    precio            DECIMAL(10, 2) NOT NULL,
+    fecha_transaccion DATE           NOT NULL,
     estado_compra     INT,
     FOREIGN KEY (tarjeta) REFERENCES tarjeta (numero_tarjeta),
     FOREIGN KEY (estado_compra) REFERENCES estado_compra (id)
 );
-
-CREATE TABLE producto
-(
-    id                  SERIAL PRIMARY KEY,
-    nombre              VARCHAR(255)   NOT NULL,
-    precio              DECIMAL(10, 2) NOT NULL,
-    cantidad_disponible INT            NOT NULL
-);
-
-CREATE TABLE compra_producto
-(
-    id_producto INT,
-    id_compra   INT,
-    cantidad    INT NOT NULL,
-    PRIMARY KEY (id_producto, id_compra),
-    FOREIGN KEY (id_producto) REFERENCES producto (id),
-    FOREIGN KEY (id_compra) REFERENCES compra (id)
-);
-
---INSERT QUERY

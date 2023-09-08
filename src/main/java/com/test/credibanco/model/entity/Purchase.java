@@ -25,11 +25,4 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "estado_compra")
     private PurchaseStatus purchaseStatus;
-
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "compra_producto",joinColumns = @JoinColumn(name = "id_compra"), inverseJoinColumns = @JoinColumn(name = "id_producto"))
-    private List<Product> products;
 }
